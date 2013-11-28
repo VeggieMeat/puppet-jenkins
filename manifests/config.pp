@@ -12,11 +12,12 @@
 #
 class jenkins::config(
   $config_hash = {},
+  $jenkins_home = '/var/lib/jenkins',
 ) {
 
   include jenkins::package
 
   Class['Jenkins::Package']->Class['Jenkins::Config']
   create_resources( 'jenkins::sysconfig', $config_hash )
+  create_resources( 'jenkins::sysconfig', {  'JENKINS_HOME' => { 'value' => "$jenkins_home" } } )
 }
-

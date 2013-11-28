@@ -78,6 +78,7 @@ class jenkins(
   $install_java       = $jenkins::params::install_java,
   $proxy_host         = undef,
   $proxy_port         = undef,
+  $jenkins_home       = '/var/lib/jenkins',
 ) inherits jenkins::params {
 
   $lts_real = str2bool($lts)
@@ -104,6 +105,7 @@ class jenkins(
 
   class { 'jenkins::config':
     config_hash => $config_hash,
+    jenkins_home => $jenkins_home,
   }
 
   class { 'jenkins::plugins':
